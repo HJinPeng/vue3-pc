@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-module.exports = { 
+module.exports = {
   extends: ['@commitlint/config-conventional'],
   prompt: {
     alias: {},
@@ -93,5 +93,5 @@ module.exports = {
     defaultIssues: '',
     defaultScope: '',
     defaultSubject: ''
-  } 
-};
+  }
+}
