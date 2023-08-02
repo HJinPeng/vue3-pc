@@ -6,7 +6,7 @@ const len = 100
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" cls="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper" style="top: 20; right: 10">
       <HelloWorld msg="You did it!" />
@@ -21,7 +21,7 @@ const len = 100
   <RouterView />
 </template>
 
-<style scoped lang="less">
+<style module lang="less">
 header {
   max-height: 100vh;
   line-height: 1.5;
