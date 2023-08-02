@@ -16,6 +16,8 @@
     "lint:style": "stylelint \"./**/*.{css,less,vue,html}\" --fix"
   },
   "dependencies": {
+    "ant-design-vue": "4.x",
+    "dayjs": "^1.11.9",
     "less": "^4.1.3",
     "pinia": "^2.1.3",
     "vue": "^3.3.4",

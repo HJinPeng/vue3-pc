@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import { messageApi } from '@/components/message'
+import { notificationApi } from '@/components/notification'
+const onClick = () => {
+  messageApi.error('失败')
+  notificationApi.error({
+    message: '失败了'
+  })
+}
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div @click="onClick">hello</div>
 </template>
