@@ -7,7 +7,16 @@ import 'dayjs/locale/zh-cn'
 import { messageContextHolder } from '@/components/message'
 import { notificationContextHolder } from '@/components/notification'
 import { modalContextHolder } from '@/components/modal'
+import { getList, getList2 } from '@/api/test'
 dayjs.locale(zhCN.locale)
+getList()
+  .then((res) => {
+    console.log('res', res, res.map((item) => item.name).join(','))
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+getList2()
 </script>
 
 <template>

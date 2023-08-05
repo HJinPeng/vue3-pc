@@ -5,7 +5,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import registerAntdv from './utils/plugins/antdv'
+import registerAntdv from '@/common/plugins/antdv'
 
 const app = createApp(App)
 
