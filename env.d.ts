@@ -6,3 +6,7 @@ interface ImportMetaEnv {
   VITE_APP_TIME_OUT: number
   VITE_APP_MD5: string
 }
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}

@@ -5,10 +5,13 @@ import axios, {
   type InternalAxiosRequestConfig,
   AxiosHeaders
 } from 'axios'
+import { useRouter } from 'vue-router'
+
 // 完整性加密
 import signMd5 from './sign-md5'
 
 import { notificationApi } from '@/components/notification'
+import { useAuthStore } from '@/stores/auth'
 
 // axios实例
 const instance = axios.create({
@@ -63,10 +66,8 @@ export default function http<T = any>({
   nativeOptions = {}
 }: Config<T>): Promise<T> {
   if (!/:\/\//.test(url)) {
-    console.log('yes')
-    url = `/${import.meta.env.BASE_URL}/${module}/${url}`.replace(/\/\//g, '/')
+    url = `/${import.meta.env.VITE_APP_CODE}/${module}/${url}`.replace(/\/\//g, '/')
   }
-  console.log('url', url)
   const httpParams = {
     method,
     url,
@@ -74,15 +75,19 @@ export default function http<T = any>({
     data,
     ...nativeOptions
   }
+  if (!httpParams.headers) {
+    httpParams.headers = new AxiosHeaders()
+  }
+
+  // 添加token
+  const authStore = useAuthStore()
+  httpParams.headers.set('X-Access-Token', authStore.token)
+
   if (md5) {
-    if (!httpParams.headers) {
-      httpParams.headers = new AxiosHeaders()
-    }
     const sign = signMd5.getSign(url, method === 'get' ? params : data)
     httpParams.headers.set('X-Sign', sign)
     httpParams.headers.set('X-TIMESTAMP', signMd5.getTimestamp())
   }
-  // todo: 添加token
 
   return instance(httpParams)
     .then((res: AxiosResponse<ResponseData>) => {
@@ -107,7 +112,12 @@ export default function http<T = any>({
           duration: 3
         })
       }
-      // todo: 添加回到登录页的逻辑
-      throw error
+      if ('data' in error && error.data.code === 401) {
+        authStore.logout(false)
+        const redirect = location.href.replace(location.origin, '')
+        const router = useRouter()
+        router.push({ name: 'Login', query: { redirect } })
+      }
+      return Promise.reject(error)
     })
 }

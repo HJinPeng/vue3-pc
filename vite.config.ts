@@ -5,17 +5,42 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueCssModule from 'vite-plugin-vue-css-module'
 
+import SvgLoader from 'vite-svg-loader'
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   console.log('env', mode, env.BASE_URL)
   return {
-    base: '/' + env.VITE_APP_CODE,
-    plugins: [vue(), vueJsx(), vueCssModule()],
+    base: '/',
+    plugins: [
+      vue(),
+      vueJsx(),
+      vueCssModule(),
+      SvgLoader({
+        svgoConfig: {
+          plugins: [
+            // {
+            //   name: 'removeAttrs',
+            //   params: {
+            //     attrs: 'fill',
+            //   },
+            // },
+          ]
+        }
+      })
+    ],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '@http': fileURLToPath(new URL('./src/utils/http', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          additionalData: `@import "@/styles/var.less";@import "@/styles/mixin.less";`
+        }
       }
     },
     server: {
@@ -39,5 +64,6 @@ function generateProxy(proxyStr: string, appCode: string) {
       }
     }
   }
+  console.log('result', result)
   return result
 }

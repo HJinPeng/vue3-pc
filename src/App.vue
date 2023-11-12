@@ -1,42 +1,23 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import { ConfigProvider } from 'ant-design-vue'
+import { ConfigProvider as AConfigProvider } from 'ant-design-vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import { messageContextHolder } from '@/components/message'
-import { notificationContextHolder } from '@/components/notification'
 import { modalContextHolder } from '@/components/modal'
-import { getList, getList2 } from '@/api/test'
+import { notificationContextHolder } from '@/components/notification'
+import { AppLayout } from '@/components/app-layout'
 dayjs.locale(zhCN.locale)
-getList()
-  .then((res) => {
-    console.log('res', res, res.map((item) => item.name).join(','))
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-getList2()
 </script>
 
 <template>
-  <ConfigProvider :locale="zhCN" :theme="{ token: { colorPrimary: '#29b49d', borderRadius: 4 } }">
-    <messageContextHolder />
-    <notificationContextHolder />
-    <modalContextHolder />
-    <a-button type="primary">ant按钮</a-button>
-    <a-input></a-input>
-    <a-select cls="select">
-      <a-select-option value="1">1</a-select-option>
-      <a-select-option value="2">2</a-select-option>
-    </a-select>
-    <a-date-picker picker="month" />
-    <RouterView />
-  </ConfigProvider>
+  <a-config-provider
+    :locale="zhCN"
+    :theme="{ token: { colorPrimary: '#29b49d', borderRadius: 4 } }"
+  >
+    <message-context-holder />
+    <modal-context-holder />
+    <notification-context-holder />
+    <AppLayout />
+  </a-config-provider>
 </template>
-
-<style module lang="less">
-.select {
-  width: 200px;
-}
-</style>
