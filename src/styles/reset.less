@@ -26,4 +26,11 @@ body {
   border-radius: 9999em;
 }
 
+a {
+  color: @primary-color;
+  &:hover {
+    color: desaturate(@primary-color, 20%);
+  }
+}
+
 @import './common.less';

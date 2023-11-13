@@ -1,7 +1,7 @@
-import { Button, Input, Select, DatePicker } from 'ant-design-vue'
+import { Button, Input, Select, Table } from 'ant-design-vue'
 import type { Plugin } from 'vue'
 
-const components = [Button, Input, Select, DatePicker]
+const components = [Button, Input, Select, Table]
 
 const registerAntdv: Plugin = {
   install(app) {
