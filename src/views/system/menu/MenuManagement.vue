@@ -5,11 +5,20 @@ import { getAllMenuApi, deleteMenuApi } from '@/api/system/menu'
 import type { Permission } from '@/api/system/auth/types'
 import { modal } from '@/components/modal'
 import { messageApi } from '@/components/message'
+import MenuModal from './MenuModal.vue'
 
 const loading = ref<boolean>(false)
-const onAdd = () => {}
-const onEdit = (record: Permission) => {}
-const onAddChild = (record: Permission) => {}
+const menuModal = ref<InstanceType<typeof MenuModal> | null>(null)
+
+const onAdd = () => {
+  menuModal.value?.add()
+}
+const onEdit = (record: Permission) => {
+  menuModal.value?.edit(record)
+}
+const onAddChild = (record: Permission) => {
+  menuModal.value?.addChild(record.id)
+}
 
 // 删除菜单
 const onDelete = (record: Permission) => {
@@ -84,6 +93,7 @@ const fetchMenuTree = () => {
       loading.value = false
     })
 }
+
 onMounted(() => {
   fetchMenuTree()
 })
@@ -104,5 +114,6 @@ onMounted(() => {
         sticky
       />
     </BaseCard>
+    <MenuModal ref="menuModal" :menu-tree="dataSource" @ok="fetchMenuTree" />
   </AppPage>
 </template>
