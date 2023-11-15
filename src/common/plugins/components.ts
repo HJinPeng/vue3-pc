@@ -11,6 +11,7 @@ import { AppPage } from '@/components/app-page'
 import { BaseCard } from '@/components/base-card'
 import { BaseIcon } from '@/components/base-icon'
 import { BaseSpace } from '@/components/base-space'
+import { BaseSearch } from '@/components/base-search'
 
 const registerComponents: Plugin = {
   install: (app) => {
@@ -23,6 +24,7 @@ const registerComponents: Plugin = {
     app.component('BaseIcon', BaseIcon)
     app.component('BaseCard', BaseCard)
     app.component('BaseSpace', BaseSpace)
+    app.component('BaseSearch', BaseSearch)
   }
 }
 
