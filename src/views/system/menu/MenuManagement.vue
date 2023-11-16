@@ -6,6 +6,9 @@ import type { Permission } from '@/api/system/auth/types'
 import { modal } from '@/components/modal'
 import { messageApi } from '@/components/message'
 import MenuModal from './MenuModal.vue'
+import { useDicts } from '@/common/hooks/use-dict'
+
+const [translateMenuType, translateStatus] = useDicts(['menu-btn', 'on-off'])
 
 const loading = ref<boolean>(false)
 const menuModal = ref<InstanceType<typeof MenuModal> | null>(null)
@@ -43,8 +46,8 @@ const columns: TableColumnType<Permission>[] = [
   {
     title: '菜单类型',
     dataIndex: 'permissionType',
-    width: 200
-    // customRender: (text) => this.Translate('menu-btn', text)
+    width: 200,
+    customRender: ({ record }) => translateMenuType(record.permissionType)
   },
   {
     title: '图标',
@@ -64,8 +67,8 @@ const columns: TableColumnType<Permission>[] = [
   {
     title: '状态',
     dataIndex: 'status',
-    width: 100
-    // customRender: (text) => this.Translate('on-off', text)
+    width: 100,
+    customRender: ({ record }) => translateStatus(record.status)
   },
   {
     title: '操作',

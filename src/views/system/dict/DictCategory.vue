@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 import type { TableColumnType } from 'ant-design-vue'
 import { useTable } from '@/common/hooks/use-table'
+import { useDicts } from '@/common/hooks/use-dict'
 import { messageApi } from '@/components/message'
 import { modal } from '@/components/modal'
 import DictCategoryModal from './DictCategoryModal.vue'
@@ -11,6 +12,8 @@ import type { DictCategoryPageParams, DictCategory } from '@/api/system/dict/typ
 const emits = defineEmits<{
   (e: 'select', row?: DictCategory): void
 }>()
+
+const [translateStatus] = useDicts(['on-off'])
 
 const dictCategoryModal = ref<InstanceType<typeof DictCategoryModal> | null>(null)
 
@@ -32,8 +35,8 @@ const columns: TableColumnType<DictCategory>[] = [
   { title: '字典编码', dataIndex: 'dictCode' },
   {
     title: '状态',
-    dataIndex: 'status'
-    // customRender: (text) => this.translate_mx_table('on-off', text)
+    dataIndex: 'status',
+    customRender: ({ record }) => translateStatus(record.status)
   },
   {
     title: '操作',

@@ -2,6 +2,7 @@
 import { computed, reactive, ref, watch } from 'vue'
 import type { TableColumnType } from 'ant-design-vue'
 import { useTable } from '@/common/hooks/use-table'
+import { useDicts } from '@/common/hooks/use-dict'
 import { messageApi } from '@/components/message'
 import { modal } from '@/components/modal'
 import DictItemModal from './DictItemModal.vue'
@@ -11,6 +12,8 @@ import type { DictItemPageParams, DictItem, DictCategory } from '@/api/system/di
 const props = defineProps<{
   dict: DictCategory | undefined
 }>()
+
+const [translateStatus] = useDicts(['on-off'])
 
 const dictId = computed(() => props.dict?.id)
 const dictName = computed(() => props.dict?.dictName || '请先选择字典')
@@ -43,8 +46,8 @@ const columns: TableColumnType<DictItem>[] = [
   { title: '条目编码', dataIndex: 'dictItemCode' },
   {
     title: '状态',
-    dataIndex: 'status'
-    // customRender: (text) => this.translate_mx_table('on-off', text)
+    dataIndex: 'status',
+    customRender: ({ record }) => translateStatus(record.status)
   },
   {
     title: '操作',
