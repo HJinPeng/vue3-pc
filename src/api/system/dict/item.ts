@@ -1,5 +1,5 @@
 import http from '@/common/http'
-import type { AddDictItem, DictItem, DictItemPageParams, EditDictItem } from './types'
+import type { AddDictItemParams, DictItem, DictItemPageParams, EditDictItemParams } from './types'
 import type { Page, PageParams } from '@/api/common-types'
 
 // 获取字典条目分页列表
@@ -11,7 +11,7 @@ export function getDictItemPageApi(params: DictItemPageParams & PageParams) {
 }
 
 // 添加字典条目
-export function addDictItemApi(data: AddDictItem) {
+export function addDictItemApi(data: AddDictItemParams) {
   return http({
     url: '/dict-item/add',
     method: 'post',
@@ -20,7 +20,7 @@ export function addDictItemApi(data: AddDictItem) {
 }
 
 // 编辑字典条目
-export function editDictItemApi(data: EditDictItem) {
+export function editDictItemApi(data: EditDictItemParams) {
   return http({
     url: '/dict-item/edit',
     method: 'put',

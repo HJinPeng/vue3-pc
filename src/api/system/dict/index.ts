@@ -1,10 +1,10 @@
 import http from '@/common/http'
 import type {
-  AddDictCategory,
+  AddDictCategoryParams,
   DictCategory,
   DictCategoryPageParams,
   DictItem,
-  EditDictCategory
+  EditDictCategoryParams
 } from './types'
 import type { Page, PageParams } from '@/api/common-types'
 
@@ -17,7 +17,7 @@ export function getDictPageApi(params: DictCategoryPageParams & PageParams) {
 }
 
 // 添加字典
-export function addDictApi(data: AddDictCategory) {
+export function addDictApi(data: AddDictCategoryParams) {
   return http({
     url: '/dict/add',
     method: 'post',
@@ -26,7 +26,7 @@ export function addDictApi(data: AddDictCategory) {
 }
 
 // 编辑字典
-export function editDictApi(data: EditDictCategory) {
+export function editDictApi(data: EditDictCategoryParams) {
   return http({
     url: '/dict/edit',
     method: 'put',

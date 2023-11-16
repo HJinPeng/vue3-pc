@@ -4,6 +4,7 @@ import type { TableColumnType } from 'ant-design-vue'
 import { useTable } from '@/common/hooks/use-table'
 import { messageApi } from '@/components/message'
 import { modal } from '@/components/modal'
+import DictCategoryModal from './DictCategoryModal.vue'
 import { deleteDictByIdApi, getDictPageApi } from '@/api/system/dict'
 import type { DictCategoryPageParams, DictCategory } from '@/api/system/dict/types'
 
@@ -11,15 +12,20 @@ const emits = defineEmits<{
   (e: 'select', row?: DictCategory): void
 }>()
 
+const dictCategoryModal = ref<InstanceType<typeof DictCategoryModal> | null>(null)
+
 const params = reactive<DictCategoryPageParams>({
   dictCode: undefined,
   dictName: undefined,
   status: undefined
 })
 
-const { loading, pagination, onSearch, onReset, onChangeTable } = useTable({ fetch, initParams })
+const { loading, pagination, onSearch, onReset, onChangeTable, computePageNo } = useTable({
+  fetch,
+  initParams
+})
 
-const dataSource = ref<DictCategory[]>()
+const dataSource = ref<DictCategory[]>([])
 
 const columns: TableColumnType<DictCategory>[] = [
   { title: '字典名称', dataIndex: 'dictName' },
@@ -49,7 +55,9 @@ function fetch() {
   getDictPageApi({
     ...params,
     pageNo: pagination.current,
-    pageSize: pagination.pageSize
+    pageSize: pagination.pageSize,
+    orderBy: 'create_date_time',
+    isAsc: false
   })
     .then((res) => {
       dataSource.value = res.records
@@ -66,8 +74,12 @@ function initParams() {
   params.status = undefined
 }
 
-function onAdd() {}
-function onEdit(record: DictCategory) {}
+function onAdd() {
+  dictCategoryModal.value?.add()
+}
+function onEdit(record: DictCategory) {
+  dictCategoryModal.value?.edit(record)
+}
 function onDelete(record: DictCategory) {
   modal.confirm({
     title: '删除',
@@ -76,7 +88,7 @@ function onDelete(record: DictCategory) {
       return deleteDictByIdApi(record.id).then(() => {
         messageApi.success('删除成功')
         // 当前页数据删完了，页码-1
-        // this.computePageNo_mx_table(record.id)
+        computePageNo(1, dataSource.value?.length)
         // 删除了当前选中行，条目表要清空
         selectRow()
         fetch()
@@ -146,7 +158,7 @@ function customRow(record: DictCategory) {
         @change="onChangeTable"
       ></a-table>
     </BaseCard>
-    <DictCategoryModal ref="modal" @ok="fetch" />
+    <DictCategoryModal ref="dictCategoryModal" @ok="fetch" />
   </div>
 </template>
 

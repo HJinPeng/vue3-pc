@@ -4,13 +4,13 @@ export interface DictCategoryPageParams {
   status: '1' | '2' | undefined //1正常 2禁用
 }
 
-export interface AddDictCategory {
+export interface AddDictCategoryParams {
   dictCode: string
   dictName: string
   status: '1' | '2' //1正常 2禁用
 }
 
-export interface EditDictCategory extends AddDictCategory {
+export interface EditDictCategoryParams extends AddDictCategoryParams {
   id: number
 }
 
@@ -32,7 +32,7 @@ export interface DictItemPageParams {
   status: '1' | '2' //1正常 2禁用
 }
 
-export interface AddDictItem {
+export interface AddDictItemParams {
   dictId: number
   dictItemCode: string | undefined
   dictItemName: string | undefined
@@ -40,7 +40,7 @@ export interface AddDictItem {
   status: '1' | '2' //1正常 2禁用
 }
 
-export interface EditDictItem extends AddDictItem {
+export interface EditDictItemParams extends AddDictItemParams {
   id: number
 }
 
