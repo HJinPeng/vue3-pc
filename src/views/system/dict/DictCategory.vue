@@ -55,9 +55,7 @@ function fetch() {
   getDictPageApi({
     ...params,
     pageNo: pagination.current,
-    pageSize: pagination.pageSize,
-    orderBy: 'create_date_time',
-    isAsc: false
+    pageSize: pagination.pageSize
   })
     .then((res) => {
       dataSource.value = res.records

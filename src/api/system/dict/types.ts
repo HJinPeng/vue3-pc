@@ -29,7 +29,7 @@ export interface DictItemPageParams {
   dictId: number
   dictItemCode: string | undefined
   dictItemName: string | undefined
-  status: '1' | '2' //1正常 2禁用
+  status: '1' | '2' | undefined //1正常 2禁用
 }
 
 export interface AddDictItemParams {
