@@ -171,8 +171,7 @@ defineExpose<{
         </a-tree-select>
       </a-form-item>
       <a-form-item label="类型" name="permissionType">
-        <a-input v-model:value="wrap.model.permissionType" placeholder="类型" />
-        <!-- <BaseDict dict-code="menu-btn" type="radio" v-model:value="wrap.model.permissionType" /> -->
+        <BaseDict v-model:value="wrap.model.permissionType" dict-code="menu-btn" type="radio" />
       </a-form-item>
       <a-form-item
         :label="`${wrap.model.permissionType === 'menu' ? '菜单' : '按钮'}名称`"
@@ -187,23 +186,24 @@ defineExpose<{
         <a-input v-model:value="wrap.model.icon" placeholder="请输入图标名称" />
       </a-form-item>
       <a-form-item v-if="isMenu" label="布局" name="layout">
-        <a-input v-model:value="wrap.model.layout" placeholder="页面布局组件" />
-        <!-- <BaseDict dict-code="layout" v-model:value="wrap.model.layout" placeholder="页面布局组件" /> -->
+        <BaseDict
+          v-model:value="wrap.model.layout"
+          dict-code="layout"
+          type="select"
+          placeholder="页面布局组件"
+        />
       </a-form-item>
       <a-form-item label="权限码" name="permissionCode">
         <a-input v-model:value="wrap.model.permissionCode" placeholder="用于接口鉴权，控制显隐等" />
       </a-form-item>
       <a-form-item v-if="isMenu" label="是否显示" name="hiddenMenu">
-        <a-input v-model:value="wrap.model.hiddenMenu" placeholder="是否显示" />
-        <!-- <BaseDict dict-code="show-hide" v-model:value="wrap.model.hiddenMenu" type="radio" /> -->
+        <BaseDict v-model:value="wrap.model.hiddenMenu" dict-code="show-hide" type="radio" />
       </a-form-item>
       <a-form-item v-if="isMenu" label="是否缓存" name="keepAlive">
-        <a-input v-model:value="wrap.model.keepAlive" placeholder="是否缓存" />
-        <!-- <BaseDict dict-code="keep-alive" v-model:value="wrap.model.keepAlive" type="radio" /> -->
+        <BaseDict v-model:value="wrap.model.keepAlive" dict-code="keep-alive" type="radio" />
       </a-form-item>
       <a-form-item v-if="isMenu" label="是否外链" name="externalLink">
-        <a-input v-model:value="wrap.model.externalLink" placeholder="是否外链" />
-        <!-- <BaseDict dict-code="external-link" v-model:value="wrap.model.externalLink" type="radio" /> -->
+        <BaseDict v-model:value="wrap.model.externalLink" dict-code="external-link" type="radio" />
       </a-form-item>
       <a-form-item
         v-if="isMenu && wrap.model.externalLink === '1'"
@@ -216,8 +216,7 @@ defineExpose<{
         <a-input-number v-model:value="wrap.model.ranking" placeholder="排序" />
       </a-form-item>
       <a-form-item label="状态" name="status">
-        <a-input v-model:value="wrap.model.status" placeholder="状态" />
-        <!-- <BaseDict dict-code="on-off" v-model:value="wrap.model.status" type="radio" /> -->
+        <BaseDict v-model:value="wrap.model.status" dict-code="on-off" type="radio" />
       </a-form-item>
     </a-form>
   </a-modal>

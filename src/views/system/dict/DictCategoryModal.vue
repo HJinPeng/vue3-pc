@@ -105,8 +105,7 @@ defineExpose<{
         <a-input v-model:value="wrap.model.dictCode" placeholder="请输入字典编码" />
       </a-form-item>
       <a-form-item label="状态" name="status">
-        <a-input v-model:value="wrap.model.status" placeholder="请输入状态" />
-        <!-- <BaseDict v-model="wrap.model.status" dict-code="on-off" type="radio" /> -->
+        <BaseDict v-model:value="wrap.model.status" dict-code="on-off" type="radio" />
       </a-form-item>
     </a-form>
   </a-modal>

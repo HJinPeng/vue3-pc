@@ -133,14 +133,14 @@ function onDelete(record: DictItem) {
           style="width: 140px"
           @pressEnter="onSearch"
         ></a-input>
-        <!-- <BaseDict
-          v-model="params.status"
+        <BaseDict
+          v-model:value="params.status"
           dict-code="on-off"
           type="select"
           placeholder="状态"
           allow-clear
           style="width: 100px"
-        /> -->
+        />
       </BaseSearch>
     </BaseCard>
     <BaseCard :title="`条目列表：${dictName}`">

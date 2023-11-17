@@ -109,8 +109,7 @@ function selectRow(row?: DictCategory) {
 }
 function customRow(record: DictCategory) {
   return {
-    onClick: (e: any) => {
-      console.log('click row', e)
+    onClick: () => {
       selectRow(record)
     }
   }
@@ -135,14 +134,14 @@ function customRow(record: DictCategory) {
           style="width: 140px"
           @pressEnter="onSearch"
         ></a-input>
-        <!-- <BaseDict
-          v-model="params.status"
+        <BaseDict
+          v-model:value="params.status"
           dict-code="on-off"
           type="select"
           placeholder="状态"
           allow-clear
           style="width: 100px"
-        /> -->
+        />
       </BaseSearch>
     </BaseCard>
     <BaseCard title="字典列表">
