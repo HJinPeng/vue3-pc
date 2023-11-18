@@ -99,10 +99,10 @@ defineExpose<{
       :wrapper-col="{ span: 18 }"
     >
       <a-form-item label="角色编码" name="roleCode">
-        <a-input v-model:value="wrap.model.roleCode" placeholder="请输入条目名称" />
+        <a-input v-model:value="wrap.model.roleCode" placeholder="请输入角色编码" />
       </a-form-item>
       <a-form-item label="角色名称" name="roleName">
-        <a-input v-model:value="wrap.model.roleName" placeholder="请输入条目编码" />
+        <a-input v-model:value="wrap.model.roleName" placeholder="请输入角色名称" />
       </a-form-item>
       <a-form-item label="状态" name="status">
         <BaseDict v-model:value="wrap.model.status" dict-code="on-off" type="radio" />

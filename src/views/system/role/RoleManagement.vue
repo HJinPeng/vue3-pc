@@ -109,14 +109,12 @@ function onDelete(record: Role) {
           v-model:value="params.roleName"
           placeholder="角色名称"
           allow-clear
-          style="width: 150px"
           @pressEnter="onSearch"
         ></a-input>
         <a-input
           v-model:value="params.roleCode"
           placeholder="角色编码"
           allow-clear
-          style="width: 140px"
           @pressEnter="onSearch"
         ></a-input>
         <BaseDict
@@ -125,7 +123,6 @@ function onDelete(record: Role) {
           type="select"
           placeholder="状态"
           allow-clear
-          style="width: 100px"
         />
       </BaseSearch>
     </BaseCard>
