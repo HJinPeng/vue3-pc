@@ -11,10 +11,10 @@ export interface UserInfo {
   id: number
   account: string
   realname: string
-  email?: string
-  phone?: string
-  profilePhoto?: string
-  sex?: '0' | '1' | '2' // 0-默认未知,1-男,2-女
+  email: string | null
+  phone: string | null
+  profilePhoto: string | null
+  sex: '0' | '1' | '2' // 0-默认未知,1-男,2-女
   status: '1' | '2' // 1正常 2禁用
   token: string
   roles: Array<{
